@@ -142,15 +142,34 @@ if not DEBUG:
         ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 
-
     import dj_database_url
 
+    """
     DATABASES = {
             'default': dj_database_url.config(
                 # Feel free to alter this value to suit your needs.
-                default='postgresql://postgres:postgres@localhost:5432/mysite',
+                #default='postgresql://postgres:postgres@localhost:5432/',
                 conn_max_age=600
                 )}
+
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': os.environ.get('NAME'),
+                'USER': os.environ.get('USER'),
+                'PASSWORD': os.environ.get('PASSWORD'),
+                'HOST': os.environ.get('HOST'),
+                'PORT': '5432',
+                }
+            }
+    """
+    
+    DATABASES = {
+            'default': dj_database_url.config(
+                # Feel free to alter this value to suit your needs.
+                default='postgresql://postgres:postgres@localhost:5432/startup-bbs',
+                conn_max_age=600)
+            }
+
 
     MIDDLEWARE = [
         'django.middleware.security.SecurityMiddleware',
